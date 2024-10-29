@@ -1,0 +1,114 @@
+1. WAP to print the sum of all the elements present on even indexes in the given array.
+
+public class CODE10 {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5,6,7,8};
+   	 int i = 0, sum = 0;
+     while (i < arr.length) {
+         sum += arr[i];
+         i += 2;
+     }
+     System.out.println(sum);
+    }
+}
+
+output:
+16
+
+Approach:
+> We have traversed the array using a while loop and kept a sum variable that will be incremented by the value
+of elements of the array4
+> At last, upon complete traversal of the array we will print the sum4
+> Here the only twist is that since we are concerned about the even indices we will start the iterator from 0 and
+will increment it by 2 every time.
+
+
+2. WAP to traverse over the elements of the array {1,2,3,4,5,6,7,8} using for each loop and print all even
+elements.
+
+public class CODE11 {
+    public static void main(String[] args) {
+        int[] arr = { 1, 2, 3, 4, 5, 6, 7, 8 };
+        for (int elem : arr) {
+            if (elem % 2 == 0)
+                System.out.println(elem);
+
+        }
+    }
+}
+
+output:
+2
+4
+6
+8
+
+Approach :
+> We will traverse the array and will keep a check that if any ith element is even we will print it else will move on
+to the next index.
+
+3. WAP to calculate the maximum element in the array {10, 7, -5, 8, 9, 0, -4} using standard library methods for
+calculating the maximum element.
+
+public class CODE12 {
+    public static void main(String[] args) {
+        int[] arr = { 10, 7, -5, 8, 9, 0, -4 };
+        int max = Integer.MIN_VALUE;
+        for (int val : arr) {
+            max = Math.max(max, val);
+        }
+        System.out.print("Largest in given array is " + max);
+
+    }
+}
+
+output:
+10
+
+Approach :
+> We will traverse the array, and will keep a max variable that will be updated with the current element of the
+array if the array element is greater than the value of max variable4
+> Initially the max variable is given the minimum integer value.
+
+
+4. WAP to find out the second largest element in the input array {34,21,54,65,43}.
+
+public class CODE13 {
+    public static void main(String[] args) {
+        int[] arr = { 34, 21, 54, 65, 43 };
+        int arr_size = arr.length;
+        int i, first, second;
+        // There should be at least two elements
+        if (arr_size < 2) {
+            System.out.printf(" Invalid Input ");
+            return;
+        }
+        int largest = second = Integer.MIN_VALUE;
+
+        // Find the largest element
+        for (i = 0; i < arr_size; i++)
+            largest = Math.max(largest, arr[i]);
+
+        // Find the second largest element
+        for (i = 0; i < arr_size; i++) {
+            if (arr[i] != largest)
+                second = Math.max(second, arr[i]);
+        }
+        if (second == Integer.MIN_VALUE)
+            System.out.printf("There is no second " +
+                    "largest element\n");
+        else
+            System.out.printf("%d\n", second);
+    }
+
+}
+
+
+output:
+54
+
+
+Approach :
+> We will traverse the array, and will keep a max variable that will be updated with the current element of the
+array if the array element is greater than the value of max variableA
+> Initially the max variable is given the minimum integer value.

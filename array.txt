@@ -1,0 +1,312 @@
+Q1: Take m and n input from the user and m * n integer inputs from user and print
+
+the following:
+
+number of positive numbers
+number of negative numbers
+number of odd numbers
+number of even numbers
+number of 0.
+
+Input 1:
+
+1 2 -3 4
+0 0 -4 2
+1 -1 2 3
+-4 -5 -7 0
+
+Output :
+number of positive numbers = 7
+number of negative numbers = 6
+number of odd numbers = 7
+number of even numbers = 9
+number of 0 = 3
+
+
+import java.io.*;
+import java.util.*;
+public class Main{ 
+  public static void main(String args[]){
+    
+    int m,n;
+    Scanner sc=new Scanner(System.in);
+    System.out.print("enter the number of rows=");
+    m=sc.nextInt();    
+    System.out.print("enter the number of column=");    
+    n=sc.nextInt();
+    int arr[][]=new int[m][n];
+    
+    int i,j;    
+       
+    System.out.println("enter the  matrix element=\n");    
+    for(i=0;i<m;i++){    
+        for(j=0;j<n;j++){    
+            arr[i][j]=sc.nextInt();  
+        }    
+    }     
+    int positive = 0 , negative = 0 , zero = 0 , odd = 0 , even = 0;
+        for( i = 0 ; i < m  ; i++){
+            for( j = 0 ; j < n  ; j++){
+                if(arr[i][j] > 0)positive++;
+                if(arr[i][j] < 0)negative++;
+                if(arr[i][j] == 0)zero++;
+                if((arr[i][j] % 2) == 0)even++;
+                if((arr[i][j] % 2) != 0)odd++;
+            }
+        }
+        
+        System.out.println("Number of positives = " + positive);
+        System.out.println("Number of negatives = " + negative);
+        System.out.println("Number of odds = " + odd);
+        System.out.println("Number of evens = " + even);
+        System.out.println("Number of zeroes = " + zero);
+    }     
+}
+
+
+output:
+
+enter the number of rows  = 4
+enter the number of columns =3
+enter the matrix element =
+-2 0 9
+0  0 8
+-1 -2 -9
+1 1 8
+Number of positives =5
+Number of negatives =4 
+Number of odds = 5
+Number of even = 7
+Number of zeroes = 3
+
+
+Approach:
+¤ In this question we have simply taken the 2D matrix as input from the user and traversed the matrix and checked for every element whether it is positive, negative, zero, odd or even.
+¤ We have used if conditions and not if-else because one element of the matrix an play multiple roles. It can even as well as positive and there are
+similar other possibilities as well.
+ 
+
+ Time complexity: O(n*m) where n = number of rows , m = number of columns
+Space complexity: O(1)
+
+Q2: write a program to print the elements above the secondary diagonal in a user
+inputted square matrix.
+
+output: 1 2  4 
+
+import java.io.*;
+import java.util.*;
+public class Main{ 
+  public static void main(String args[]){
+    
+    int m,n;
+    Scanner sc=new Scanner(System.in);
+    System.out.print("enter the number of rows : ");
+    m=sc.nextInt();    
+    System.out.print("enter the number of column : ");    
+    n=sc.nextInt();
+    int arr[][]=new int[m][n];
+    
+    int i,j;    
+       
+    System.out.println("enter the  matrix element : ");    
+    for(i = 0 ; i < m ; i++){    
+        for(j = 0 ; j < n ; j++){    
+            arr[i][j]=sc.nextInt();  
+        }    
+    }     
+    
+    System.out.println("Elements above secondary diagonal are as follows : ");    
+    for(i = 0 ; i < m ; i++){    
+        for(j = 0 ; j < n ; j++){    
+            if(i + j < m - 1)System.out.print(arr[i][j] + "  ");
+            }    
+        }  
+    }     
+}
+Output:
+Enter the number of rows: 3
+Enter the number of column:3
+Enter the matrix element:
+1 2 3 4 5 
+3 4 5 6 7
+5 6 7 8 9
+0 1 4 2 3
+9 7 6 5 8
+Elements of both the diagonals are as follows:
+1 5 4 6 7 1 2 9 8 
+
+
+Approach:
+>For primary diagonal as highlighted by blue color we can observe the similarities in the coordinate that the ith coordinate is always equal to the jth coordinate.
+> For the secondary diagonal as highlighted by red color we can observe the similarities in the coordinate that the sum of (i + j)th coordinate is always equal to 1 less in the number of columns i.e m - 1.[it can be also treated as n
+1 because the matrix is square matrix.
+
+>For an odd matrix we can see one thing that the middle element (highlighted by blue and red colors) is also an element of primary as well as secondary diagonal but it needs to be printed just once. For that we have used the
+if-else condition so that either the primary diagonal condition meets or the secondary diagonal condition and not both simultaneously.
+
+Time complexity: O(n*n) where n = number of rows
+Space complexity: O(1)
+
+Optimised Approach.
+As we have a square matrix, and we know this special property of Diagonal element, then for one diagonal both indices are the same and for the other the sum of both indices = m-1.
+
+So we will optimize our solution by just traversing one time and getting both the values together.
+
+To skip the middle element twice we will add an check extra i.e. i != m-1-i.
+
+This condition will ensure that for the middle element as we are already printing by i,then we shouldn’t print by i!= m-1-i
+
+Time complexity: O(n) where n = number of rows
+Space complexity: O(1)
+
+
+import java.io.*;
+import java.util.*;
+public class Test{ 
+  public static void main(String args[]){
+    
+    int m,n;
+    Scanner sc=new Scanner(System.in);
+    System.out.print("enter the number of rows : ");
+    m=sc.nextInt();    
+    System.out.print("enter the number of column : ");    
+    n=sc.nextInt();
+    int arr[][]=new int[m][n];
+    
+    int i,j;    
+       
+    System.out.println("enter the  matrix element : ");    
+    for(i = 0 ; i < m ; i++){    
+        for(j = 0 ; j < n ; j++){    
+            arr[i][j]=sc.nextInt();  
+        }    
+    }     
+    
+    System.out.println("Elements of both the diagonals are as follows : ");    
+
+    // As we have a square matrix, and we know this special property of Diagnol element, then for one diagonal both indices are same and for other the sum of both = m-1. 
+    // So we will optimise our solution by just traversing one time and getitng both the values. To skip middle element twice we will add an check extra i.e. i!= m-1-i
+    for(i = 0 ; i < m ; i++){        
+        System.out.print(arr[i][i] + "  ");
+
+        if(i != m-1-i)
+            System.out.print(arr[i][m-1-i] + "  ");
+        }    
+    }  
+      
+}
+
+Q4: Write a java program to find the largest element of a given 2D array of
+integers.
+
+Output : 9
+
+solution:
+
+import java.io.*;
+import java.util.*;
+public class Main{ 
+  public static void main(String args[]){
+    
+    int m,n;
+    Scanner sc=new Scanner(System.in);
+    System.out.print("enter the number of rows : ");
+    m=sc.nextInt();    
+    System.out.print("enter the number of column : ");    
+    n=sc.nextInt();
+    int arr[][]=new int[m][n];
+    
+    int i,j;    
+       
+    System.out.println("enter the  matrix element : ");    
+    for(i = 0 ; i < m ; i++){    
+        for(j = 0 ; j < n ; j++){    
+            arr[i][j]=sc.nextInt();  
+        }    
+    }  
+    
+    int maximum = -100000008;
+     for(i = 0 ; i < m ; i++){    
+        for(j = 0 ; j < n ; j++){    
+            if(maximum < arr[i][j])maximum = arr[i][j];  
+        }    
+    }
+    
+    System.out.println("The maximum element in this matrix is : " + maximum);
+    }     
+}
+
+output:
+enter the number of rows: 3
+enter the number of column: 4
+enter the  matrix element :
+1 3 6 9
+0 9 8 2
+7 0 6 -1
+The maximum elements in this matrix is : 9
+
+Approach:Ð
+> We have simply traversed the matrix and updated the “maximum” if any other element is greater than the
+currently set “maximum”.
+
+
+Time complexity: O(m*n) where m = number of rows and n = number of columns
+Space complexity: O(1)
+
+
+Q5: Write a function which accepts a 2D array of integers and its size as arguments
+and displays the elements of middle row and the elements of middle column. Printing can be done in any order.[Assuming the 2D Array to be a square matrix with odd dimensions i.e. 3x3, 5x5,
+7x7 etc...]
+
+output: 3 5 5 6 37 76 4 3 
+
+import java.io.*;
+import java.util.*;
+public class Main{ 
+    public static void main(String args[]){
+    
+        int m,n;
+        Scanner sc=new Scanner(System.in);
+        System.out.print("enter the number of rows : ");
+        m=sc.nextInt();    
+        
+        int arr[][]=new int[m][m];
+        
+        int i,j;    
+           
+        System.out.println("enter the  matrix element : ");    
+        for(i = 0 ; i < m ; i++){    
+            for(j = 0 ; j < m ; j++){    
+                arr[i][j]=sc.nextInt();  
+            }    
+        }  
+        
+        System.out.println("The elements  of the middle row and middle column are as follows : ");
+        
+         for(i = 0 ; i < m ; i++)System.out.print(arr[i][m/2] + "  ");    
+         for(j = 0 ; j < m ; j++){
+            if(j == m/2)continue;
+            System.out.print(arr[m/2][j] + "  ");
+        }
+    }     
+}
+
+output:
+enter the number of rows :
+3
+enter the matrix element:
+1 2 3
+4 5 6 
+7 8 9
+The elements of the middle row and middle column are as follows:
+2 5 8 4 6
+
+
+Approach:
+> We have simply printed the elements when the value of row is fixed as “m/2” and when value of column is fixed as “m/2”.
+> Since the middle element i.e “arr[m/2][m/2]” will be repeated twice but we need to print it once so we simply applied an if condition in the second for loop that if the value of column is also “m/2” then we can simply continue over this element because it has been already counted in the row’s for loop.
+
+
+Time complexity: O(m) where m = number of rows and for complete code if we consider than it is O(m*m) as we are taking input in 2 for loops.
+Space complexity: O(1)
